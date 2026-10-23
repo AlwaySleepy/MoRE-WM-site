@@ -691,7 +691,7 @@ class StepPlayer {
         <button class="icon-btn" data-a="prev" aria-label="Previous phase">${ICON.prev}</button>
         <button class="icon-btn main" data-a="play" aria-label="Play / pause">${ICON.play}</button>
         <button class="icon-btn" data-a="next" aria-label="Next phase">${ICON.next}</button>
-        <div class="step-legend"><span><i style="background:var(--pred)"></i>MoRE prediction (planned 3D flow)</span><span><i style="background:var(--exec)"></i>Execution of the selected action</span></div>
+        <div class="step-legend"><span><i style="background:var(--pred)"></i>P: MoRE prediction (planned 3D flow)</span><span><i style="background:var(--exec)"></i>E: execution of the selected action</span></div>
         <div class="readout" style="margin-left:auto"></div>
       </div>`;
     this.stage = $(".stage", root); this.v = mkVideo(); this.stage.prepend(this.v);
@@ -718,8 +718,8 @@ class StepPlayer {
     this.tl.innerHTML = "";
     this.cells = this.segs.map((s, k) => {
       const len = s.b - s.a + 1, btn = document.createElement("button");
-      btn.className = "tl-seg " + s.t + (len < 45 ? " short" : ""); btn.style.flexGrow = Math.max(len, 26); btn.style.minWidth = "30px";
-      btn.innerHTML = `<span class="tl-fill"></span><span class="tl-lbl"><span class="lf">${s.t === "P" ? "Predict" : "Exec"} </span><span class="ls">${s.t}</span>${s.step}</span>`;
+      btn.className = "tl-seg " + s.t; btn.style.flexGrow = Math.max(len, 26); btn.style.minWidth = "30px";
+      btn.innerHTML = `<span class="tl-fill"></span><span class="tl-lbl">${s.t}${s.step}</span>`;
       btn.title = `${s.t === "P" ? "MoRE prediction" : "Execution"} · step ${s.step} · frames ${s.a}–${s.b}`;
       btn.addEventListener("click", () => this.goto(k, true));
       this.tl.appendChild(btn); return btn;
