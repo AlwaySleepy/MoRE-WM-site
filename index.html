@@ -101,7 +101,7 @@
       <li><a href="#results">Results</a>
         <ol>
           <li><a href="#sim-dynamics">Sim Dynamics</a></li>
-          <li><a href="#real-dynamics">Real-World Dynamics</a></li>
+          <li><a href="#real-dynamics">Real-World Prediction</a></li>
           <li><a href="#mpc-sim">MPC in Simulation</a></li>
           <li><a href="#mpc-real">MPC in Real World</a></li>
         </ol>
@@ -116,7 +116,7 @@
     <section id="tldr" class="sec">
       <div class="tldr">
         <div class="tldr-label">TL;DR</div>
-        <p><strong>MoRE</strong> is a 3D point-cloud world model that infers the physical regime from a short interaction history and routes each interaction to a dedicated <em>rigid</em>, <em>deformable</em>, or <em>prehensile</em> motion expert. One model, real-time, and ready for MPC.</p>
+        <p><strong>MoRE</strong> is a 3D point-cloud world model that infers the physical regime from a short interaction history and routes each interaction to a dedicated <em>rigid</em>, <em>deformable</em>, or <em>prehensile</em> motion expert. It runs in real time and is used for MPC planning.</p>
       </div>
       <!-- <div class="stats" data-reveal>
         <div class="stat"><div class="stat-num" data-count="3">3</div><div class="stat-lbl">physics-aligned<br/>motion experts</div></div>
@@ -146,16 +146,16 @@
 
     <!-- MOTIVATION -->
     <section id="motivation" class="sec">
-      <div class="sec-head"><span class="kicker">Motivation</span><h2>What would happen if the robot did <em class="hl">this</em>… or <em class="hl">this</em>?</h2></div>
+      <div class="sec-head"><span class="kicker">Motivation</span><h2>Motivation</h2></div>
       <figure class="frame">
         <img src="assets/figs/teaser.jpg" width="1584" height="694" alt="MoRE predicts action-conditioned 3D dynamics for rigid and deformable objects under prehensile and non-prehensile actions" loading="lazy" />
-        <figcaption>One MoE world model for rigid and deformable objects, prehensile and non-prehensile actions, running at 20 FPS.</figcaption>
+        <figcaption>MoRE predicts the motion of rigid and deformable objects under prehensile and non-prehensile actions, at 20 FPS.</figcaption>
       </figure>
 
       <div class="two-col">
         <div>
           <!-- <h3>Scaling alone is not enough</h3> -->
-          <p> We need a world model that is <strong>3D</strong>, <strong>multi-physics</strong>, <strong>multi-tool</strong>, and <strong>feed-forward</strong>. Existing methods cover only part of this. MoRE pairs a large mixed dataset with a <strong>physics-informed mixture of motion experts</strong>.</p>
+          <p>For manipulation, a world model should operate in 3D, handle multiple physical regimes and tools, and run feed-forward. Prior methods cover only some of these properties (see table). MoRE combines a large mixed simulation and real-world dataset with a physics-informed mixture of motion experts.</p>
         </div>
         <div class="cap-table-wrap" data-reveal>
           <table class="cap-table" id="capTable">
@@ -171,7 +171,7 @@
     <section id="method" class="sec">
 
       
-      <div class="sec-head"><span class="kicker">Method</span><h2>One shared encoder, many physics</h2>
+      <div class="sec-head"><span class="kicker">Method</span><h2>Method</h2>
         <!-- <!-- <p class="sec-intro">MoRE treats both the scene and the robot action as 3D point clouds and predicts future scene point clouds autoregressively.</p> --></div>
 
               <!-- Architecture figure -->
@@ -193,7 +193,7 @@
 
       <!-- MoE explorer -->
       <div id="moe-explorer" class="subsec">
-        <h3 class="sub-h">Interactive: watch the router pick an expert</h3>
+        <h3 class="sub-h">Expert routing</h3>
         <div class="tabs" role="tablist" data-tabs="moe">
           <button role="tab" class="tab active" data-key="rigid"><i style="background:var(--ex-rigid)"></i>Rigid · Non-prehensile</button>
           <button role="tab" class="tab" data-key="defnp"><i style="background:var(--ex-defnp)"></i>Deformable · Non-prehensile</button>
@@ -280,8 +280,8 @@
 
     <!-- RESULTS -->
     <section id="results" class="sec">
-      <div class="sec-head"><span class="kicker">Results</span><h2>Seeing is believing</h2>
-        <p class="sec-intro">Drag the scrubber to step through predicted 3D flow frame by frame. MPC rollouts play as <span class="tag-p">prediction</span> → <span class="tag-e">execution</span> pairs, one planning step at a time.</p></div>
+      <div class="sec-head"><span class="kicker">Results</span><h2>Results</h2>
+        <p class="sec-intro">Drag the slider to step through the predicted 3D flow. MPC rollouts are shown as <span class="tag-p">prediction</span> → <span class="tag-e">execution</span> pairs, one planning step at a time.</p></div>
 
       <!-- Sim dynamics -->
       <div id="sim-dynamics" class="subsec">
@@ -304,7 +304,7 @@
 
       <!-- Real dynamics -->
       <div id="real-dynamics" class="subsec">
-        <h3 class="sub-h">Real-world dynamics: one model, many materials</h3>
+        <h3 class="sub-h">Real-world prediction</h3>
         <div class="viewer" data-viewer="realdyn">
           <div class="tabs" role="tablist" id="realdynTabs">
             <button class="tab active" data-key="0"><i style="background:var(--ex-rigid)"></i>Pushing box</button>
@@ -313,7 +313,7 @@
             <button class="tab" data-key="3"><i style="background:var(--ex-defp)"></i>Moving sloth</button>
           </div>
           <div class="scrub-player" id="realdynPlayer"></div>
-          <p class="viewer-cap">One model, four interactions in the same scene: rigid box, plate from two sides, and a soft plush sloth.</p>
+          <p class="viewer-cap">Four interactions in the same scene: pushing a box, pushing a plate from two sides, and moving a plush sloth.</p>
         </div>
       </div>
 
